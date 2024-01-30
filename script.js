@@ -1,9 +1,9 @@
 let data, randomIndex, quote, author;
 
-const quoteDiv = document.querySelector(".quote");
-const authorDiv = document.querySelector(".author");
-const newQuoteBtn = document.querySelector(".newQuoteBtn");
-const twitterBtn = document.querySelector(".twitterBtn");
+const quoteDiv = document.querySelector('.quote');
+const authorDiv = document.querySelector('.author');
+const newQuoteBtn = document.querySelector('.newQuoteBtn');
+const twitterBtn = document.querySelector('.twitterBtn');
 
 const appendQuote = (data) => {
   quote = data.text;
@@ -12,8 +12,8 @@ const appendQuote = (data) => {
   authorDiv.innerHTML = `${data.author}`;
 };
 
-const getQuote = () => {
-  randomIndex = Math.floor(Math.random() * 10 * 164.3);
+const getQuote = (length) => {
+  randomIndex = Math.floor(Math.random() * length);
   appendQuote(data[randomIndex]);
 };
 
@@ -21,7 +21,7 @@ const fetchQuote = async () => {
   const url = `https://type.fit/api/quotes`;
   const res = await fetch(url);
   data = await res.json();
-  getQuote();
+  getQuote(data.length);
 };
 
 fetchQuote();
@@ -31,10 +31,10 @@ const tweet = () => {
   window.open(tweetUrl);
 };
 
-newQuoteBtn.addEventListener("click", () => {
-  getQuote();
+newQuoteBtn.addEventListener('click', () => {
+  getQuote(data.length);
 });
 
-twitterBtn.addEventListener("click", () => {
+twitterBtn.addEventListener('click', () => {
   tweet();
 });
